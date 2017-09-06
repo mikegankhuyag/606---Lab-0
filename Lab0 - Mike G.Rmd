@@ -1,0 +1,110 @@
+---
+title: "Lab 0 - Mike G"
+author: "Munkhnaran Gankhuyag"
+date: "August 30, 2017"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+
+
+##Questions    
+
+```{r load-abrbuthnot-data, eval=TRUE}
+source("more/arbuthnot.R")
+```
+
+1.  What command would you use to extract just the counts of girls baptized? Try
+    it!
+```{r}
+arbuthnot$girls
+```
+
+2.  Is there an apparent trend in the number of girls baptized over the years?  
+    How would you describe it?
+
+```{r}
+plot(x = arbuthnot$year, y = arbuthnot$girls, type = "l")
+```
+
+There is an increasing trend after a slight dip in 1650.
+
+3.  Now, make a plot of the proportion of boys over time. What do you see? Tip: 
+If you use the up and down arrow keys, you can scroll through your previous 
+commands, your so-called command history. You can also access it by clicking on 
+the history tab in the upper right panel.  This will save you a lot of typing in
+the future.
+
+```{r}
+plot(x = arbuthnot$year, y = arbuthnot$boys, type = "l")
+
+```
+There is a similar trend among boys with slightly larger number of baptizes.
+
+
+
+```{r load-present-data, eval=TRUE}
+source("more/present.R")
+```
+
+
+#Part 1
+```{r}
+View(present)#shows years 1940 - 2002
+dim(present) #63 observations of 3 variables
+names(present) #"year" "boys" "girls"
+```
+
+#Part 2
+```{r}
+plot(x=present$year, y=present$girls +present$boys, type = "l")
+
+summary(present)
+```
+
+Present data shows a boom in births during the mid 1940s, a slight dip during the 1980s and an upward tred after 1980. The Arbuthnot data showed the opposite. A downward trend in the 1650's and a boom after the 1660s. 
+
+```{r}
+plot(x=present$year, y=present$boys, type = "l")
+summary(present$boys)
+```
+
+```{r}
+plot(x=present$year, y=present$girls, type = "l")
+summary(present$girls)
+```
+
+```{r}
+max(present$boys + present$girls) -min(present$boys + present$girls)
+```
+
+While the graph shows similar trends, when you compare the actual numbers, the present number of births is significantly larger.
+The range for the arbuthnot is 10533 births.
+The range for the present is 1907927 births.
+
+
+#Part 3
+```{r}
+plot(x= present$year, y =present$boys/present$girls, type = "l")
+summary(present$boys/present$girls)
+```
+
+boys to girls ratio is all above 1, which means Arbuthnot's observation about boys being born in greater proportion than girls hold up in the U.S.
+
+```{r}
+present$boys>present$girls
+
+```
+
+When you test if present boys is greater than present girls, it shows 63 TRUE values.
+
+#Part 4
+
+```{r}
+which.max(present$boys + present$girls)
+present[22, ] 
+```
+
+1961 had the largest number of births.
